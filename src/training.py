@@ -17,13 +17,16 @@ from sklearn.metrics import (
 
 class TrainModels:
     def __init__(self,path):
+        # Load the processed Iris data and set the model output folder.
         self.data = pd.read_csv(path)
         self.model_path = "models"
 
     def splitData(self):
+        # Separate the feature columns from the species labels.
         X = self.data.drop(columns=["species", "target"])
         y = self.data["species"]
 
+        # Keep 20 percent of the data for testing the trained models.
         X_train,X_test,y_train,y_test = train_test_split(
             X,
             y,
@@ -35,14 +38,17 @@ class TrainModels:
         return X_train,X_test,y_train,y_test
 
     def save_model(self,model,filename):
+        # Save a trained model so it can be used later.
         path = f"{self.model_path}/{filename}"
         jb.dump(model,path)
         print("Model Saved : ",path)
 
     
     def logisticRegression(self):
+        # Train and evaluate a logistic regression model.
         X_train,X_test,y_train,y_test = self.splitData()
 
+        # Scale the features before making predictions.
         model = Pipeline([("scaler",StandardScaler()),("classifier",LogisticRegression(max_iter=200))])
 
         model.fit(X_train,y_train)
@@ -56,6 +62,7 @@ class TrainModels:
         self.save_model(model,"logistic_regression.pkl")
 
     def KNearestNeighborhood(self):
+        # Train and evaluate a K-nearest neighbors model.
         X_train,X_test,y_train,y_test = self.splitData()
 
         model = Pipeline([("scaler",StandardScaler()),("classifier",KNeighborsClassifier(n_neighbors=5))])
@@ -71,6 +78,7 @@ class TrainModels:
         self.save_model(model,"KNN.pkl")
 
     def DecisionTree(self):
+        # Train and evaluate a decision tree model.
         X_train,X_test,y_train,y_test = self.splitData()
 
         model = DecisionTreeClassifier(random_state=42)
@@ -86,6 +94,7 @@ class TrainModels:
         self.save_model(model,"decision_tree.pkl") 
 
     def main(self):
+        # Train all three models in sequence.
         print("Now Start the Train Models : ")
         print("\n\nLogistic Regression Model Trainig Start ...")
         self.logisticRegression()
@@ -98,6 +107,7 @@ class TrainModels:
         print("\n\nDecision Tree completed ...")
 
     def test(self):
+        # Print basic checks about the training data.
         print("Shape:", self.data.shape)
         print("Columns:", self.data.columns.tolist())
         print("Missing values:\n", self.data.isnull().sum())
