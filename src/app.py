@@ -34,10 +34,10 @@ FEATURES = [
 ]
 
 class IrisInput(BaseModel):
-    sepal_length: float = Field(ge=0,le=10)
-    sepal_width: float = Field(ge=0,le=10)
-    petal_length: float = Field(ge=0,le=10)
-    petal_width: float = Field(ge=0,le=10)
+    sepal_length: float = Field(gt=0,le=10)
+    sepal_width: float = Field(gt=0,le=10)
+    petal_length: float = Field(gt=0,le=10)
+    petal_width: float = Field(gt=0,le=10)
 
 @app.get("/")
 def home():
