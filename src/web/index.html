@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Predict Iris flower species with a trained machine learning model.">
+  <title>Iris Vision | Flower Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <nav class="topbar">
+      <a class="brand" href="/">
+        <span class="brand-mark">✦</span>
+        <span>IRIS VISION</span>
+      </a>
+      <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API docs <span>↗</span></a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Machine learning, made simple</p>
+        <h1>Meet your <em>next</em><br>iris.</h1>
+        <p class="intro">Enter the measurements of an iris flower and let our trained Logistic Regression model identify its species.</p>
+        <div class="model-status"><span class="status-dot"></span> Model online <span class="status-divider">•</span> 93% validation accuracy</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="stem stem-one"></div>
+        <div class="stem stem-two"></div>
+        <div class="leaf leaf-one"></div>
+        <div class="leaf leaf-two"></div>
+        <div class="flower">
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+          <b></b>
+        </div>
+      </div>
+    </section>
+
+    <section class="predict-card">
+      <div class="card-heading">
+        <div>
+          <p class="eyebrow">Flower measurements</p>
+          <h2>What does your iris look like?</h2>
+        </div>
+        <span class="step">01 <span>/ 01</span></span>
+      </div>
+      <form id="prediction-form">
+        <div class="field-grid">
+          <label>
+            <span>Sepal length <small>cm</small></span>
+            <input name="sepal_length" type="number" min="0" max="10" step="0.1" placeholder="5.1" required>
+          </label>
+          <label>
+            <span>Sepal width <small>cm</small></span>
+            <input name="sepal_width" type="number" min="0" max="10" step="0.1" placeholder="3.5" required>
+          </label>
+          <label>
+            <span>Petal length <small>cm</small></span>
+            <input name="petal_length" type="number" min="0" max="10" step="0.1" placeholder="1.4" required>
+          </label>
+          <label>
+            <span>Petal width <small>cm</small></span>
+            <input name="petal_width" type="number" min="0" max="10" step="0.1" placeholder="0.2" required>
+          </label>
+        </div>
+        <div class="form-footer">
+          <p class="hint">All measurements should be in centimeters.</p>
+          <button type="submit" id="predict-button">Identify species <span>→</span></button>
+        </div>
+      </form>
+      <div id="result" class="result" hidden aria-live="polite"></div>
+    </section>
+
+    <footer>
+      <span>Powered by FastAPI + scikit-learn</span>
+      <span>Built for curious minds <span class="heart">♥</span></span>
+    </footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
